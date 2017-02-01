@@ -1,8 +1,8 @@
-<project name= "WebServer" default="compile" basedir".">
-	
-	<target name="compile">
-           <mkdir dir="build/jar/"/>
-           <jar destfile="build/jar/WebServer.jar"
-           <javac WebWorker.java>
-           <javac WebServer.java>
-	   </target>
+<project name="program1" default="compile">
+
+    <target name="compile">
+        <mkdir dir="."/>
+        <javac srcdir="." destdir="." includeantruntime="false"/>
+    </target>
+
+</project>
