@@ -117,7 +117,7 @@ private void writeHTTPHeader(OutputStream os, String contentType, String filePat
       os.write("Date: ".getBytes());
       os.write((df.format(d)).getBytes());
       os.write("\n".getBytes());
-      os.write("Server: Jon's very own server\n".getBytes());
+      os.write("Server: Zach's very own server\n".getBytes());
       //os.write("Last-Modified: Wed, 08 Jan 2003 23:11:55 GMT\n".getBytes());
       //os.write("Content-Length: 438\n".getBytes());
       os.write("Connection: close\n".getBytes());
@@ -134,7 +134,7 @@ private void writeHTTPHeader(OutputStream os, String contentType, String filePat
       os.write("Date: ".getBytes());
       os.write((df.format(d)).getBytes());
       os.write("\n".getBytes());
-      os.write("Server: Jon's very own server\n".getBytes());
+      os.write("Server: Zack's very own server\n".getBytes());
       //os.write("Last-Modified: Wed, 08 Jan 2003 23:11:55 GMT\n".getBytes());
       //os.write("Content-Length: 438\n".getBytes());
       os.write("Connection: close\n".getBytes());
@@ -174,7 +174,7 @@ private void writeContent(OutputStream os, String filePath) throws Exception
           DateFormat df = DateFormat.getDateTimeInstance();
           df.setTimeZone(TimeZone.getTimeZone("MST"));
           fileContent = fileContent.replace("<cs371date>",df.format(d)); //Replace <cs371data> with the date
-          String server = "JFS Server";
+          String server = "ZPM Server";
           fileContent = fileContent.replace("<cs371server>",server); //Replace <cs371server> with server name Tag
           os.write(fileContent.getBytes());
       } catch(IOException e) {
@@ -191,7 +191,7 @@ private void writeContent(OutputStream os, String filePath) throws Exception
 
 //    To send hardcoded Data
 //    os.write("<html><head></head><body>\n".getBytes());
-//    os.write("<h3>Jon Waz Here!!!!!</h3>\n".getBytes());
+//    os.write("<h3>Zachz W4z H3r3!!!!!</h3>\n".getBytes());
 //    os.write("</body></html>\n".getBytes());
 }
 
