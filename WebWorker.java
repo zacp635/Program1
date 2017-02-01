@@ -150,6 +150,9 @@ private void writeHTTPHeader(OutputStream os, String contentType, String filePat
 }
 
 /**
+* ooommmgheeerd wat is happen?
+* i has noe idears
+* is this even saving?
 * Write the data content to the client network connection. This MUST
 * be done after the HTTP header has been written out.
 * @param os is the OutputStream object to write to
