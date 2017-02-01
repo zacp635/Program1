@@ -35,6 +35,9 @@ public class WebWorker implements Runnable
 {
 
 private Socket socket;
+private String FileName = "";
+private boolean fileExists;
+private String html = "";
 
 /**
 * Constructor: must have a valid open socket
@@ -57,6 +60,7 @@ public void run()
       InputStream  is = socket.getInputStream();
       OutputStream os = socket.getOutputStream();
       readHTTPRequest(is);
+      checkForFile();
       writeHTTPHeader(os,"text/html");
       writeContent(os);
       os.flush();
@@ -78,7 +82,9 @@ private void readHTTPRequest(InputStream is)
    while (true) {
       try {
          while (!r.ready()) Thread.sleep(1);
-         line = r.readLine();
+         line = r.readLine();// read one line at a time
+         line.toLowerCase();
+         html = fileToString();// take a whole line and turn it to a string
          System.err.println("Request line: ("+line+")");
          if (line.length()==0) break;
       } catch (Exception e) {
@@ -120,9 +126,31 @@ private void writeHTTPHeader(OutputStream os, String contentType) throws Excepti
 **/
 private void writeContent(OutputStream os) throws Exception
 {
-   os.write("<html><head></head><body>\n".getBytes());
-   os.write("<h3>My web server works!</h3>\n".getBytes());
-   os.write("</body></html>\n".getBytes());
+   //os.write("<html><head></head><body>\n".getBytes());
+   //os.write("<h3>My web server works!</h3>\n".getBytes());
+   //os.write("</body></html>\n".getBytes());
+	os.write(html.getBytes());
+}
+
+private void checkForFile(){
+	File htmlll = new File(FileName);
+	fileExists = htmlll.exists();
+	System.out.println("fileExists = " + fileExists);
+}
+
+private String fileToString(){
+	String content = "";
+   try {
+       BufferedReader in = new BufferedReader(new FileReader(FileName));
+       String str;
+       while ((str = in.readLine()) != null) {
+           content +=str;
+       }
+       in.close();
+   } catch (IOException e) {
+
+   }
+	return content;
 }
 
 } // end class
