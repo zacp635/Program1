@@ -31,6 +31,7 @@ public class WebWorker implements Runnable
 {
 
 private Socket socket;
+private FileInputStream InPs;
 
 /**
 * Constructor: must have a valid open socket
@@ -56,7 +57,7 @@ public void run()
       //readHTTPRequest(is);
       filePath = readHTTPRequest(is);
       System.err.println("FilePath = " + filePath);
-      writeHTTPHeader(os,"text/html", filePath);
+      writeHTTPHeader(os,"text/html""image/png""image/jpeg""image/gif", filePath. );
       writeContent(os, filePath);
       os.flush();
       socket.close();
