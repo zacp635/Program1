@@ -31,7 +31,10 @@ public class WebWorker implements Runnable
 {
 
 private Socket socket;
+<<<<<<< HEAD
 private FileInputStream InPs;
+=======
+>>>>>>> 336da6d681394cffac3eece586ca2fe599e7e81f
 
 /**
 * Constructor: must have a valid open socket
@@ -57,7 +60,11 @@ public void run()
       //readHTTPRequest(is);
       filePath = readHTTPRequest(is);
       System.err.println("FilePath = " + filePath);
+<<<<<<< HEAD
       writeHTTPHeader(os,"text/html""image/png""image/jpeg""image/gif", filePath. );
+=======
+      writeHTTPHeader(os,"text/html", filePath);
+>>>>>>> 336da6d681394cffac3eece586ca2fe599e7e81f
       writeContent(os, filePath);
       os.flush();
       socket.close();
@@ -151,6 +158,9 @@ private void writeHTTPHeader(OutputStream os, String contentType, String filePat
 }
 
 /**
+* ooommmgheeerd wat is happen?
+* i has noe idears
+* is this even saving?
 * Write the data content to the client network connection. This MUST
 * be done after the HTTP header has been written out.
 * @param os is the OutputStream object to write to
