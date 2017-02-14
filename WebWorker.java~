@@ -32,9 +32,6 @@ public class WebWorker implements Runnable
 
 private Socket socket;
 
-private FileInputStream InPs;
-
-
 /**
 * Constructor: must have a valid open socket
 **/
@@ -42,12 +39,7 @@ public WebWorker(Socket s)
 {
    socket = s;
 }
-private static String getFileExtension(File file) { 
-   String fileName = file.getName(); 
-   if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) 
-   return fileName.substring(fileName.lastIndexOf(".")+1); 
-   else return ""; 
-}
+
 /**
 * Worker thread starting point. Each worker handles just one HTTP
 * request and then returns, which destroys the thread. This method
@@ -64,24 +56,8 @@ public void run()
       //readHTTPRequest(is);
       filePath = readHTTPRequest(is);
       System.err.println("FilePath = " + filePath);
-      String mytype = "text/html";
-      File f = new File(filePath);
-      String ext = "";
-      if (f.exists() && !f.isDirectory()) {
-         ext = getFileExtension(f);
-         if(ext.equals("png")) mytype = "image/png";
-         else if (ext.equals("jpg")) mytype = "image/jpg";
-         else if (ext.equals("gif")) mytype = "image/gif";
-         else if (ext.equals("ico")) mytype = "image/x-icon";
-      }
-         
-         
-      writeHTTPHeader(os,mytype, filePath);
-      if ((ext.equals("png")) || (ext.equals("jpeg")) || (ext.equals("gif")) || (ext.equals("ico")))
-       writeImageContent(os, filePath, ext);
-      else 
+      writeHTTPHeader(os,"text/html", filePath. "image/png","image/jpeg","image/gif");
       writeContent(os, filePath);
-      
       os.flush();
       socket.close();
    } catch (Exception e) {
@@ -174,9 +150,6 @@ private void writeHTTPHeader(OutputStream os, String contentType, String filePat
 }
 
 /**
-* ooommmgheeerd wat is happen?
-* i has noe idears
-* is this even saving?
 * Write the data content to the client network connection. This MUST
 * be done after the HTTP header has been written out.
 * @param os is the OutputStream object to write to
@@ -221,18 +194,5 @@ private void writeContent(OutputStream os, String filePath) throws Exception
 //    os.write("<h3>Zachz W4z H3r3!!!!!</h3>\n".getBytes());
 //    os.write("</body></html>\n".getBytes());
 }
-
-   private void writeImageContent(OutputStream os, String filePath, String ext) throws Exception {
-//  Reads the requested filePath and sends it back to the browser.
-    
-
-      String fromFileName = filePath; 
-      BufferedInputStream in = new BufferedInputStream(new FileInputStream(fromFileName)); 
-      byte[] buff = new byte[32 * 1024]; 
-      int len = 0; 
-      while((len = in.read(buff)) > 0)  
-         os.write(buff);  
-      in.close();
-      }
 
 } // end class
